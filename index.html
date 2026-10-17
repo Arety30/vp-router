@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Virtual Port Manager</h2>
+    <div id="routeList"></div>
+    <hr>
+    <h3>Create New Mapping</h3>
+    <input id="channel" placeholder="Channel (e.g., B)">
+    <input id="port" placeholder="Port (e.g., 9002)" type="number">
+    <button onclick="addRoute()">Create Mapping</button>
+
+    <script>
+        async function addRoute() {
+            const channel = document.getElementById('channel').value;
+            const port = parseInt(document.getElementById('port').value);
+            await fetch('/add_route', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({channel, port})
+            });
+            location.reload();
+        }
+    </script>
+</body>
+</html>
